@@ -19,3 +19,11 @@ Spring Boot applies authorization and business rules before reading or modifying
 Heads-up scheduler/service checks scheduled menu availability against active subscriptions and sends notifications through the selected notification service.
 
 Staff analytics are generated from stored review history and aggregate queries rather than from manually collected feedback.
+
+## Use Case Diagram
+
+The following UML use case diagram shows the primary roles and tasks
+within the Dining Hall Review App. The main actors are GSU Students,
+PantherDining Staff/Admin users, and the external Notification Service.
+
+![Dining Hall Review App Use Case Diagram](diagrams/use-case-diagram.png)
