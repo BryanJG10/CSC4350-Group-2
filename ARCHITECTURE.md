@@ -23,7 +23,7 @@ Staff analytics are generated from stored review history and aggregate queries r
 ## Use Case Diagram
 
 The following UML use case diagram shows the primary roles and tasks
-within the Dining Hall Review App. The main actors are GSU Students,
+within the Dining Hall Review App. The main actors are GSU Student,
 PantherDining Staff/Admin users, and the external Notification Service.
 
 ![Dining Hall Review App Use Case Diagram](diagrams/use-case-diagram.png)
