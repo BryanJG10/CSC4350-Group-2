@@ -27,3 +27,8 @@ within the Dining Hall Review App. The main actors are GSU Student,
 PantherDining Staff/Admin users, and the external Notification Service.
 
 ![Dining Hall Review App Use Case Diagram](diagrams/use-case-diagram.png)
+
+
+**Schema Diagram**
+
+<img width="1502" height="1135" alt="image" src="https://github.com/user-attachments/assets/6f7be501-9ca6-49f9-872a-41966ba00922" />
