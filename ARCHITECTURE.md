@@ -5,14 +5,14 @@ The recommended architecture is a three-tier web architecture: presentation laye
 |----------------------|--------------------------------------------------------|-------------------------------------------------------|
 | Frontend | React + JavaScript/TypeScript + HTML/CSS | Build the responsive GUI, navigation, search/filter controls, review forms, saved-item screens, and staff dashboard. |
 | Backend | Java + Spring Boot + REST API | Implement authentication/authorization, review rules, filtering, aggregation, saved items, heads-up logic, and admin functions. |
-| Database | MySQL | Store normalized relational data for users, halls, stations, items, reviews, tags, saved items, availability, and notification events. |
+| Database | PostgresSQL | Store normalized relational data for users, halls, stations, items, reviews, tags, saved items, availability, and notification events. |
 | Data Access | Spring Data JPA / Hibernate | Map Java domain objects to relational tables and reduce repetitive database-access code |
 | Testing | JUnit + Spring Boot Test, frontend component tests as appropriate | Test business rules, API endpoints, integration behavior, and critical UI workflows. |
 | Version Control | Git/GitHub | Coordinate team development, code review, and configuration management. |
-| Deployment/Cloud | Cloud-hosted application and managed MySQL instance | Provide a shared environment for the team and final demonstration, exact provider can be selected based on course constraints. |
+| Deployment/Cloud | Cloud-hosted application and managed PostgresSQL instance | Provide a shared environment for the team and final demonstration, exact provider can be selected based on course constraints. |
 | Notifications | Email or browser notification provider | Deliver heads-up alerts, provider choice depends on available project infrastructure. |
 ### Flow
-Student/Staff browser -> React frontend -> Spring Boot REST API -> MySQL database
+Student/Staff browser -> React frontend -> Spring Boot REST API -> PostgresSQL database
 
 Spring Boot applies authorization and business rules before reading or modifying database records.
 
