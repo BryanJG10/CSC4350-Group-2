@@ -17,16 +17,16 @@ Dining Hall Review is a web application built for Georgia State University's Pan
 ## System Architecture
 The Dining Hall Review App follows a three-tier web architecture
 **Frontend -> Backend -> Database**
-The frontend handles the user interface and sends requests to the backend. The backend handles business logic, authentication, reviews, search/filtering, saved items, Heads-Up notifications, and communication with the database. The database stores users, dining halls, stations, menu items, reviews, ratings, dietary/allergen tags, saved items, and notifications.
+The frontend handles the user interface and sends requests to the backend. The backend handles business logic, authentication, reviews, search/filtering, saved items, Heads-Up notifications, and communication with the database. The PostgreSQL database stores users, dining halls, stations, menu items, reviews, ratings, dietary/allergen tags, saved items, and notifications. Each dining hall's weekly schedule is stored as JSON, using a structure defined by the application. Each menu item also has separate availability start and end time columns, which the application uses to determine when an item is scheduled to be available.
 
 ## Technology Stack
-*   **Language(s)**: Java, Javascript/Typescript, HTML, CSS, SQL
+*   **Language(s)**: Java, Javascript/Typescript, HTML, CSS, PostgreSQL
 *   **Frontend** React + Javascript/HTML/CSS
 *   **Backend**: Java + Spring Boot + Rest API
-*   **Cloud/Deployment**: Cloud-hosted Spring Boot backend + MySQL
+*   **Cloud/Deployment**: Cloud-hosted Spring Boot backend + PostgreSQL
 *   **Notifications**: Email/browser notification service for the Heads-Up feature
 *   **Database Connection**: Spring Dara JPA / Hibernate
-*   **Database**: MySQL
+*   **Database**: PostgreSQL, JSON storage
 *   **IDE**: IntelliJ IDEA
 
 ## Team Members
