@@ -136,7 +136,7 @@ test('accessible screens and no horizontal overflow at desktop, 390px and 320px'
 
 test('capture review evidence', async ({ page, browser }, testInfo) => {
   test.skip(testInfo.project.name !== 'chrome', 'One reproducible screenshot set from desktop Chrome.')
-  const folder = '../docs/sprint-2/evidence'
+  const folder = 'test-results/evidence'
   await mkdir(folder, { recursive: true })
   await testInfo.attach('browser-version', { body: browser.version(), contentType: 'text/plain' })
   const captures = [

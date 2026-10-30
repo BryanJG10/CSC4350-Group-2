@@ -65,12 +65,11 @@ VITE_DATA_MODE=mock   # or http
 VITE_API_BASE_URL=/api
 ```
 
-**HTTP mode is not integrated.** It targets a _proposed_ contract
-([docs/sprint-2/api-contract-proposal.md](../docs/sprint-2/api-contract-proposal.md)) that Jalen and
-Wilder have not yet confirmed, and the backend has no endpoints yet. Never put database credentials
+**HTTP mode is not integrated.** It targets a _proposed_ contract (see `createHttpService` in
+`src/services/dining.ts`) that Jalen and Wilder have not yet confirmed. Never put database credentials
 or secrets in `VITE_*` variables — everything in them is shipped to the browser.
 
 ## Out of scope for Sprint 2
 
 Accounts/sign-in, editing/deleting reviews, saved items, heads-up notifications, staff tools,
-nutrition and recommendations. See [docs/sprint-2/frontend-traceability.md](../docs/sprint-2/frontend-traceability.md).
+nutrition and recommendations.
