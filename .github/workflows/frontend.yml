@@ -1,0 +1,32 @@
+# Runs the frontend's automated checks on every pull request and push to main.
+# Only triggers when files under frontend/ (or this workflow) change.
+name: Frontend checks
+
+on:
+  pull_request:
+    paths: ['frontend/**', '.github/workflows/frontend.yml']
+  push:
+    branches: [main]
+    paths: ['frontend/**', '.github/workflows/frontend.yml']
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: frontend/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm build
