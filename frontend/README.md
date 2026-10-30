@@ -1,6 +1,6 @@
 # Dining Hall Review — React Frontend (Sprint 2)
 
-Owner: Bryan Gilles · CSC 4350 Team Deuce (Group 2)
+Owner: Team Deuce (Group 2)
 
 Student-facing screens from the wireframes: dining halls (03), stations (04), station menu (05),
 search & combined filters (06), item details (07), rating/review form (08), shared states (20) and
