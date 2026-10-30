@@ -1,0 +1,3 @@
+# Keep LF endings so Prettier checks pass on Windows checkouts too.
+* text=auto eol=lf
+*.png binary
