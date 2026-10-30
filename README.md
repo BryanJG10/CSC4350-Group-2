@@ -41,3 +41,5 @@ The frontend handles the user interface and sends requests to the backend. The b
 | 2 | Janiya | SWDD + SRS + UML / Wireframes + Project Coordination / Final Packagaging | Wilder |
 | 3 | Wilder | Databases + Cloud based integration + Record all meetings and drop in summary channel | Jalen |
 | 4 | Jalen | Backend Development + Integration & Testing | Bryan |
+## Frontend (Sprint 2)
+The React frontend lives in [`frontend/`](frontend/README.md) and currently runs on deterministic **mock data** (no live API or database yet). See [`docs/sprint-2/`](docs/sprint-2/) for requirement traceability, the verification log, screenshots, and the proposed API contract awaiting backend review.
