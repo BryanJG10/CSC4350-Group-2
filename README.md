@@ -32,6 +32,8 @@ The frontend handles the user interface and sends requests to the backend. The b
 ## Backend / Database Setup
 The Spring Boot backend lives in `app/` and connects to PostgreSQL through Spring Data JPA / Hibernate. Connection details are read from environment variables, so no credentials are committed to the repository.
 
+The team keeps those values in Doppler now, so start with [SETUP.md](SETUP.md) if you are setting up from a fresh clone. The steps below still work and describe the same database, but they cover the manual route where you supply the values yourself.
+
 1.  Create a Postgres database with your provider (Neon, Supabase, etc.) and copy its host, port, database name, username, and password.
 2.  Copy `app/.env.example` to `app/.env` and fill in those values. The file is git-ignored.
 3.  Start the backend from the `app/` directory:
