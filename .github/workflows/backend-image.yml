@@ -1,0 +1,48 @@
+name: backend image
+
+# Every pull request builds the image so a broken Dockerfile shows up before
+# merge. Only a push to main publishes it to the registry.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - ".github/workflows/backend-image.yml"
+  pull_request:
+    paths:
+      - "app/**"
+      - ".github/workflows/backend-image.yml"
+  workflow_dispatch:
+
+# packages: write is what lets the push succeed. The token is the one GitHub
+# hands the job automatically, so there is no secret to store anywhere.
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # skipped on pull requests: a PR from a fork gets a read-only token and
+      # there is nothing to publish anyway
+      - uses: docker/login-action@v3
+        if: github.event_name != 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./app
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ghcr.io/bryanjg10/csc4350-group-2-backend:latest
+            ghcr.io/bryanjg10/csc4350-group-2-backend:${{ github.sha }}
+          # keeps the gradle downloads and dependency layers between runs so a
+          # rebuild takes seconds instead of minutes
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
