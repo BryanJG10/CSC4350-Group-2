@@ -27,8 +27,24 @@ spring:
       # "update" keeps the schema in sync while the model is changing quickly.
       # Switch to "validate" once the schema is stable and managed by migrations.
       ddl-auto: ${JPA_DDL_AUTO:update}
+
     properties:
       hibernate:
         jdbc:
           time_zone: UTC
     show-sql: ${JPA_SHOW_SQL:false}
+
+# Container Apps asks the app whether it is alive before sending it traffic.
+# Only the health endpoint is exposed, so nothing else is reachable from outside.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      # report up or down only, so the database details stay private
+      show-details: never
+      probes:
+        # adds /actuator/health/liveness and /actuator/health/readiness
+        enabled: true
