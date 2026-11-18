@@ -9,7 +9,7 @@ The recommended architecture is a three-tier web architecture: presentation laye
 | Data Access | Spring Data JPA / Hibernate | Map Java domain objects to relational tables and reduce repetitive database-access code |
 | Testing | JUnit + Spring Boot Test, frontend component tests as appropriate | Test business rules, API endpoints, integration behavior, and critical UI workflows. |
 | Version Control | Git/GitHub | Coordinate team development, code review, and configuration management. |
-| Deployment/Cloud | Cloud-hosted application and managed PostgresSQL instance | Provide a shared environment for the team and final demonstration, exact provider can be selected based on course constraints. |
+| Deployment/Cloud | Container image for the backend, static hosting for the frontend, managed PostgreSQL | One image runs the Spring Boot jar. The built React files are served as static files. The database stays managed. The provider can change without changing the app. |
 | Notifications | Email or browser notification provider | Deliver heads-up alerts, provider choice depends on available project infrastructure. |
 ### Flow
 Student/Staff browser -> React frontend -> Spring Boot REST API -> PostgresSQL database
@@ -19,6 +19,16 @@ Spring Boot applies authorization and business rules before reading or modifying
 Heads-up scheduler/service checks scheduled menu availability against active subscriptions and sends notifications through the selected notification service.
 
 Staff analytics are generated from stored review history and aggregate queries rather than from manually collected feedback.
+
+### Deployment
+
+The backend builds into a container image. `app/Dockerfile` has two stages. One stage runs the Gradle wrapper and produces the jar. The other copies only the jar onto a Java 17 runtime image and runs it as a non-root user.
+
+The frontend builds into static files in `frontend/dist`. The app uses hash routing, so the static host does not need rewrite rules.
+
+The planned target is Azure Container Apps for the image, Azure Static Web Apps for the static files, and a managed PostgreSQL instance. Front Door is optional. It is only needed to put both parts on one hostname, which also avoids CORS.
+
+Nothing is deployed yet. There is no pipeline. Local commands, the container build, and the other hosting options are in `LOCAL-DEVELOPMENT.md`.
 
 ## Use Case Diagram
 

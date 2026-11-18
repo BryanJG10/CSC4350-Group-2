@@ -23,7 +23,7 @@ The frontend handles the user interface and sends requests to the backend. The b
 *   **Language(s)**: Java, Javascript/Typescript, HTML, CSS, PostgreSQL
 *   **Frontend** React + Javascript/HTML/CSS
 *   **Backend**: Java + Spring Boot + Rest API
-*   **Cloud/Deployment**: Cloud-hosted Spring Boot backend + PostgreSQL
+*   **Cloud/Deployment**: Container image for the backend, static hosting for the frontend, managed PostgreSQL
 *   **Notifications**: Email/browser notification service for the Heads-Up feature
 *   **Database Connection**: Spring Dara JPA / Hibernate
 *   **Database**: PostgreSQL, JSON storage
@@ -55,6 +55,8 @@ The Spring Boot backend lives in `app/` and connects to PostgreSQL through Sprin
 | `JPA_SHOW_SQL` | `false` | Log generated SQL |
 
 `./gradlew test` runs against an in-memory H2 database (see `app/src/test/resources/application-test.yaml`), so tests do not require the Postgres instance.
+
+Full local commands, the container build, and the hosting options are in `LOCAL-DEVELOPMENT.md`.
 
 ## Team Members
 *   Bryan Gilles

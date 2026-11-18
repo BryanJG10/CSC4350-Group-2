@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# frontend build and test output
+frontend/dist/
+frontend/coverage/
+frontend/playwright-report/
+frontend/blob-report/
+frontend/test-results/
+
+# backend build output (app/.gitignore also covers these)
+app/build/
+app/.gradle/
+
+# local env files
+.env
+.env.local
+app/.env
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# editor and os files
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
