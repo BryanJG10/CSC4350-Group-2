@@ -17,44 +17,71 @@ Dining Hall Review is a web application built for Georgia State University's Pan
 ## System Architecture
 The Dining Hall Review App follows a three-tier web architecture
 **Frontend -> Backend -> Database**
-The frontend handles the user interface and sends requests to the backend. The backend handles business logic, authentication, reviews, search/filtering, saved items, Heads-Up notifications, and communication with the database. The PostgreSQL database stores users, dining halls, stations, menu items, reviews, ratings, dietary/allergen tags, saved items, and notifications. Each dining hall's weekly schedule is stored as JSON, using a structure defined by the application. Each menu item also has separate availability start and end time columns, which the application uses to determine when an item is scheduled to be available.
+The frontend handles the user interface and sends requests to the backend. The backend handles business logic, authentication, reviews, search/filtering, saved items, Heads-Up notifications, and communication with the database. The PostgreSQL database stores users, dining halls, stations, menu items, reviews, ratings, dietary/allergen tags, saved items, and notifications. Each dining hall's weekly schedule is stored as JSON, using a structure defined by the application. Each menu item also has separate availability start and end time columns, which the application uses to determine when an item is scheduled to be available. Doppler provides each team member with the database credentials needed to connect to the shared development database; credentials are supplied to the backend as environment variables and are not committed to Git.
 
 ## Technology Stack
 *   **Language(s)**: Java, Javascript/Typescript, HTML, CSS, PostgreSQL
-*   **Frontend** React + Javascript/HTML/CSS
-*   **Backend**: Java + Spring Boot + Rest API
+*   **Frontend**: React + JavaScript/TypeScript + HTML/CSS + Vite
+*   **Backend**: Java + Spring Boot + Spring MVC / Rest API + Gradle wrapper
 *   **Cloud/Deployment**: Cloud-hosted Spring Boot backend + PostgreSQL
 *   **Notifications**: Email/browser notification service for the Heads-Up feature
+*   **Frontend Tests**: Vitest + Testing Library + Playwright
+*   **Backend Tests**: Spring Dara JPA / Hibernate
 *   **Database Connection**: Spring Dara JPA / Hibernate
 *   **Database**: PostgreSQL, JSON storage
+*   **Secret Management**: Doppler
 *   **IDE**: IntelliJ IDEA
 
-## Backend / Database Setup
-The Spring Boot backend lives in `app/` and connects to PostgreSQL through Spring Data JPA / Hibernate. Connection details are read from environment variables, so no credentials are committed to the repository.
+## Database 
+### PreRequisites
+1. Git
+2. JDK 17
+3. Node.js 22.12.0+
+4. pnpm 10.34.9
+5. Doppler CLI
+**Use bash below to verify installed versions**
+```bash
+java -version
+node --version
+pnpm --version
+doppler --version
+```
 
-1.  Create a Postgres database with your provider (Neon, Supabase, etc.) and copy its host, port, database name, username, and password.
-2.  Copy `app/.env.example` to `app/.env` and fill in those values. The file is git-ignored.
-3.  Start the backend from the `app/` directory:
+### Frontend Setup
+for more information, go to [FRONTEND.md](FRONTEND.md)
+**Make sure to cd into /frontend before installing pnpm**
+### Backend Setup
+for more information, go to [BACKEND.md](BACKEND.md)
 
-    ```powershell
-    ./gradlew bootRun
-    ```
+## Running The Application
+Run the backend and frontend in two separate terminals. Start the backend first so the API is available when the frontend needs it.
 
-    If you prefer real environment variables over `.env`, set `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD`, and `DB_SSLMODE` in your shell or IDE run configuration. Environment variables take precedence over `.env`.
+<br>
 
-| Variable | Default | Purpose |
-|---|---|---|
-| `DB_HOST` | `localhost` | Postgres host |
-| `DB_PORT` | `5432` | Postgres port |
-| `DB_NAME` | `dining_hall_review` | Database name |
-| `DB_USERNAME` | `postgres` | Database user |
-| `DB_PASSWORD` | *(empty)* | Database password |
-| `DB_SSLMODE` | `require` | `require` for managed Postgres, `disable` for a local server |
-| `DB_POOL_SIZE` | `5` | HikariCP connection pool size |
-| `JPA_DDL_AUTO` | `update` | Hibernate schema handling; use `validate` once the schema is stable |
-| `JPA_SHOW_SQL` | `false` | Log generated SQL |
+**Terminal 1**
+Enter the following code after navigating to the repo root
 
-`./gradlew test` runs against an in-memory H2 database (see `app/src/test/resources/application-test.yaml`), so tests do not require the Postgres instance.
+*MacOS/Linux*
+```bash
+doppler run -- ./app/gradlew -p app bootRun
+```
+
+*Windows*
+```bash
+doppler run -- .\app\gradlew.bat -p app bootRun
+```
+<br>
+
+**Terminal 2**
+Enter the following code after navigating to the repo root
+```bash
+cd frontend
+pnpm dev
+```
+Vite is configured to bind to 127.0.0.1. Open the local URL printed in the terminal (normally http://127.0.0.1:5173/) in your browser.
+
+<br>
+**to stop either server, go to its terminal and type [ Ctrl + C ]**
 
 ## Team Members
 *   Bryan Gilles
