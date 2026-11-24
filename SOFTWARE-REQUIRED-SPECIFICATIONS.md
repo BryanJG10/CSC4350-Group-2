@@ -48,7 +48,7 @@ The project is a web application and should be implementable within the team's c
 
 The PostgreSQL relational model must support halls, stations, menu items, users, reviews, and dietary/allergen tags. Each dining hall's weekly schedule shall be stored as JSON, with its structure defined and interpreted by the application. Each menu item shall include start and end availability time fields.
 
-The team must maintain clear separation between frontend, backend, database, and testing responsibilities.
+The team must maintain clear separation between frontend, backend, database, and testing responsibilities. Database connection credentials for shared development shall be distributed to authorized team members through the team's Doppler secret-management project and shall not be committed into source control.
 
 Features requiring unavailable external systems, such as verified meal-swipe transactions, should be treated as future enhancements unless an approved integration is provided.
 
@@ -204,7 +204,7 @@ NFR-27: The interface shall be usable on desktop and mobile-sized screens.
 | Hardware Interfaces | No specialized hardware is required for the core web application. Users need an internet-connected device with a supported web browser. |
 
 ## Data Requirements
-PostgreSQL stores each dining hall's weekly schedule in a JSON column; the application defines and interprets the JSON structure. Each menu item has separate availability start and end time columns, which the application uses alongside the weekly schedule for display and Heads-Up notification logic
+PostgreSQL stores each dining hall's weekly schedule in a JSON column; the application defines and interprets the JSON structure. Each menu item has separate availability start and end time columns, which the application uses alongside the weekly schedule for display and Heads-Up notification logic. The backend connection is configured through environment variables supplied by Doppler for shared development-- credentials must not be stored in source control
 
 The core relational entities identified for the project are:
 | **Entity** | **Purpose** |
@@ -228,17 +228,19 @@ everything is built from; as well as more in depth architectural information
 
 The recommended architecture is a three-tier web architecture: presentation layer, application/API layer, and relational data layer. This matches the team's separation of frontend, backend, database, and testing responsibilities.
 | **Layer/Technology** | **Choice** | **Reason** |
-|----------------------|--------------------------------------------------------|-------------------------------------------------------|
-| Frontend | React + JavaScript/TypeScript + HTML/CSS | Build the responsive GUI, navigation, search/filter controls, review forms, saved-item screens, and staff dashboard. |
-| Backend | Java + Spring Boot + REST API | Implement authentication/authorization, review rules, filtering, aggregation, saved items, heads-up logic, and admin functions. |
-| Database | PostgreSQL | Store relational data for users, halls, stations, items, reviews, tags, saved items, availability, and notification events, plus JSON weekly schedules for dining halls. |
+|----------------------|------------|------------|
+| Frontend | React + JavaScript/TypeScript + HTML/CSS + Vite | Build the responsive GUI, navigation, search/filter controls, review forms, saved-item screens, and staff dashboard. |
+| Backend | Java + Spring Boot + Spring MVC | Implement authentication/authorization, review rules, filtering, aggregation, saved items, heads-up logic, and admin functions. |
+| Database | PostgresSQL | Store normalized relational data for users, halls, stations, items, reviews, tags, saved items, availability, and notification events. |
 | Data Access | Spring Data JPA / Hibernate | Map Java domain objects to relational tables and reduce repetitive database-access code |
-| Testing | JUnit + Spring Boot Test, frontend component tests as appropriate | Test business rules, API endpoints, integration behavior, and critical UI workflows. |
+| Frontend Testing | Vitest, Testing Library, Playwright | Test frontend components and browser workflows. |
+| Backend Testing | JUnit + Spring Boot Test with H2 | Test business rules, API endpoints, integration behavior, and critical UI workflows. Run backend tests against an in-memory H2 database configured in PostgreSQL compatibility mode, without touching shared PostgreSQL instance. |
 | Version Control | Git/GitHub | Coordinate team development, code review, and configuration management. |
-| Deployment/Cloud | Cloud-hosted application and managed PostgreSQL instance | Provide a shared environment for the team and final demonstration; the exact provider can be selected based on course constraints. |
+| Secrets | Doppler | Supply shared development database credentials to authorized team members without committing credentials. |
+| Deployment/Cloud | Cloud-hosted application and managed PostgresSQL instance | Provide a shared environment for the team and final demonstration, exact provider can be selected based on course constraints. |
 | Notifications | Email or browser notification provider | Deliver heads-up alerts, provider choice depends on available project infrastructure. |
 ### Flow
-Student/Staff browser -> React frontend -> Spring Boot REST API -> PostgreSQL database
+Student/Staff browser -> React/Vite frontend -> Spring Boot REST API -> PostgreSQL database
 
 Spring Boot applies authorization and business rules before reading or modifying database records.
 
