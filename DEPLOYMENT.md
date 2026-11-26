@@ -1,6 +1,6 @@
 # Deployment
 
-This is the shipping side of the project. It covers how the backend becomes a container image, how that image reaches the registry, and what still has to happen before it runs in Azure. Getting a working app on your own machine is a different job, and SETUP.md covers it.
+This is the shipping side of the project. It covers how the backend becomes a container image, how that image reaches the registry, and what still has to happen before it runs in Azure. Getting a working app on your own machine is a different job, and SETUP.md covers it. The frontend has its own plan in FRONTEND-DEPLOYMENT.md.
 
 ## What goes into the image
 

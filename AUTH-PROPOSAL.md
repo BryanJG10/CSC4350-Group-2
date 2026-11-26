@@ -1,6 +1,6 @@
 # Proposal: put authentication inside the app
 
-Written while the deployment work was in flight. Nothing here is agreed yet, and the image pipeline does not depend on it.
+Written while the deployment work was in flight. Superseded by AUTH-PLAN.md, which keeps Spring Security but moves accounts into a users table and uses bearer tokens, because the site and the API will not share an origin.
 
 ## What I am proposing
 
